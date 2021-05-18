@@ -63,7 +63,7 @@ class Search extends Component {
                             name="search"
                             placeholder="The Way of Kings"
                         />
-                        <SubmitBtn onClick={this.handleFormSubmit} />
+                        <SearchBtn onClick={this.handleFormSubmit} />
                     </form>
 
                     {this.state.books.length ? (

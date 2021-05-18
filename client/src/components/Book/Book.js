@@ -16,7 +16,8 @@ class Book extends Component {
     }
 
     render() { 
-        <div>
+        return (
+            <div>
             <div className="card">
                 <div className="card-header"></div>
                 <div className="card-body">
@@ -29,6 +30,7 @@ class Book extends Component {
                 </div>
             </div>
         </div>
+        )
     }
 }
 

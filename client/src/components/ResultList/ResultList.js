@@ -11,8 +11,8 @@ class ResultList extends Component {
                     title={book.volumeInfo.title}
                     link={book.volumeInfo.previewLink}
                     authors={book.volumeInfo.authors}
-                    image={book.volumeInfo.imageLinks ? volumeInfo.imageLinks : "https://via.placeholder.com/150"}
-                    description={book.volumeInfo.description}
+                    image={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks : "https://via.placeholder.com/150"}
+                    description={book.description}
                     saveBook={this.props.saveBook}
                 />
             ))
