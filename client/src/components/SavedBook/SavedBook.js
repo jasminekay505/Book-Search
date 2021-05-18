@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 
 function SavedBook(props) {
-    const { title, authors, image, link, description, deleteBook = props }
+    const { title, authors, image, link, description, deleteBook } = props
     return (
         <div>
             <div className="card">
