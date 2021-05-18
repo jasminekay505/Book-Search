@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Container } from "../components/Grid/Grid";
-import Jumbotron from "../components/Jumbotron/Jumbotron";
-import Nav from "../components/Nav/Nav";
-import SavedList from "../components/SavedList/SavedList";
+import { Container } from "../components/Grid";
+import Jumbotron from "../components/Jumbotron";
+import Nav from "../components/Nav";
+import SavedList from "../components/SavedList";
 
 import API from "../utils/API";
 

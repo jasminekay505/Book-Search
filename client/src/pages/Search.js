@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Container } from "../components/Grid/Grid";
-import Jumbotron from "../components/Jumbotron/Jumbotron";
-import Nav from "../components/Nav/Nav";
-import { Input, SearchBtn } from "../components/SearchForm/SearchForm";
-import ResultList from "../components/ResultList/ResultList";
+import { Container } from "../components/Grid";
+import Jumbotron from "../components/Jumbotron";
+import Nav from "../components/Nav";
+import { Input, SearchBtn } from "../components/SearchForm";
+import ResultList from "../components/ResultList";
 
 import API from "../utils/API";
 

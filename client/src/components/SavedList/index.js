@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SavedBook from "../SavedBook/SavedBook";
+import SavedBook from "../SavedBook";
 
 class SavedList extends Component {
     render() {

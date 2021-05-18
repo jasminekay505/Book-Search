@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Book from "../Book/Book";
+import Book from "../Book";
 
 class ResultList extends Component { 
     render() { 
