@@ -8,8 +8,8 @@ function App() {
     <Router>
       <div>
         <Switch>
-          <Route exact path="/" componenet={Search} />
-          <Route exact path="/saved" componenet={Saved} />
+          <Route exact path="/" component={Search} />
+          <Route exact path="/saved" component={Saved} />
         </Switch>
       </div>
     </Router>
