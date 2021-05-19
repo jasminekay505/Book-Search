@@ -16,7 +16,7 @@ function Form({ search, handleInputChange, handleFormSubmit }) {
                     />
                 </div>
                 <div className="col-md-3">
-                    <button className="btn btn-primary btn-sm form-control" type="submit" onClick={handleFormSubmit}>
+                    <button className="btn btn-light btn-sm form-control" type="submit" onClick={handleFormSubmit}>
                         Search
         </button>
                 </div>

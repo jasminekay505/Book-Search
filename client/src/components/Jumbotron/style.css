@@ -1,0 +1,8 @@
+.jumbotron {
+    background-image: url("../../utils/assets/plantshelf.jpg");
+    background-position: center;
+    color: #614051; 
+}
+.myText { 
+    background-color: white;
+}

@@ -15,18 +15,6 @@ class Search extends Component {
         search: ""
     };
 
-    searchGoogleBooks = () => {
-        API.googleBooks(this.state.search)
-            .then(res => {
-                this.setState({
-                    books: res.data.items,
-                    search: ""
-                },
-                    console.log(res.data))
-            })
-            .catch(err => console.log(err));
-    };
-
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -34,6 +22,21 @@ class Search extends Component {
         });
     };
 
+    searchGoogleBooks = () => {
+        API.googleBooks(this.state.search)
+          .then(res =>
+            this.setState({
+              books: res.data.items
+            }),
+            console.log(this.state.books)
+          )
+          .catch(() =>
+            this.setState({
+              books: [],
+            })
+          );
+      };
+    
     handleFormSubmit = event => {
         event.preventDefault();
         this.searchGoogleBooks();
@@ -78,7 +81,7 @@ class Search extends Component {
                                         description={book.volumeInfo.description}
                                         image={book.volumeInfo.imageLinks.thumbnail}
                                         Button={() => (
-                                            <button
+                                            <button className="btn btn-light"
                                                 onClick={() => this.saveBook(book.id)}
                                             >
                                                 Save

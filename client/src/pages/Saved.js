@@ -53,12 +53,12 @@ class Saved extends Component {
                                     <Book
                                         key={book._id}
                                         title={book.title}
-                                        authors={book.authors.join(", ")}
+                                        authors={book.authors}
                                         link={book.link}
                                         description={book.description}
                                         image={book.image}
                                         Button={() => (
-                                            <button
+                                            <button className="btn btn-light"
                                                 onClick={() => this.deleteBook(book._id)}
                                             >
                                                 Delete
