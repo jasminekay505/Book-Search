@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import { Container } from "../components/Grid";
+import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import Nav from "../components/Nav";
 import { Input, SearchBtn } from "../components/SearchForm";
 import ResultList from "../components/ResultList";
+import Card from "../components/Card";
+import Book from "../components/Book";
+import { List } from "../components/List";
+import Form from "../components/Form";
 
 import API from "../utils/API";
 
@@ -19,7 +23,8 @@ class Search extends Component {
                 this.setState({
                     books: res.data.items,
                     search: ""
-                })
+                },
+                console.log(res.data))
             })
             .catch(err => console.log(err));
     };
@@ -36,17 +41,18 @@ class Search extends Component {
         this.searchGoogleBooks();
     };
 
-    saveBook = selectedBook => {
+    saveBook = id => {
+        const book = this.state.books.find(book => book.id === id);
+
         API.saveBook({
-            id: selectedBook.id,
-            title: selectedBook.title,
-            authors: selectedBook.authors,
-            description: selectedBook.description,
-            image: selectedBook.image,
-            link: selectedBook.link
+            title: book.volumeInfo.title,
+            authors: book.volumeInfo.authors,
+            description: book.volumeInfo.description,
+            image: book.volumeInfo.imageLinks.thumbnail,
+            link: book.volumeInfo.infoLink
         })
-            .then(res => console.log("Book posted to DB", res))
-            .cath(err => console.log(err));
+            .then(() => this.searchGoogleBooks())
+            .catch(err => console.log("Post err", err));
     };
 
     render() {
@@ -55,28 +61,42 @@ class Search extends Component {
                 <Nav />
                 <Container fluid>
                     <Jumbotron />
-                    <form>
-                        <h5>Search for books</h5>
-                        <Input
-                            value={this.state.search}
-                            onChange={this.handleInputChange}
-                            name="search"
-                            placeholder="The Way of Kings"
+                    <Card title="Search">
+                        <Form
+                            handleInputChange={this.handleInputChange}
+                            handleFormSubmit={this.handleFormSubmit}
+                            search={this.state.search}
                         />
-                        <SearchBtn onClick={this.handleFormSubmit} />
-                    </form>
-
-                    {this.state.books.length ? (
-                        <ResultList
-                            bookState={this.state.books}
-                            saveBook={this.saveBook}>
-                        </ResultList>
-                    ) : (
-                        <div>
-                            <hr />
-                            <p>No results to display</p>
-                        </div>
-                    )}
+                    </Card>
+                    <Card title="Results">
+                        {this.state.books.length ? (
+                            <List>
+                                {this.state.books.map(book => ( 
+                                    <Book
+                                    key  = {book.id}
+                                    title = {book.volumeInfo.title}
+                                    authors = {book.volumeInfo.authors.join(", ")}
+                                    link = {book.volumeInfo.infoLink}
+                                    description = {book.volumeInfo.description}
+                                    image = {book.volumeInfo.imageLinks.thumbnail}
+                                    Button = { () => (
+                                        <button
+                                        onClick = { () => this.saveBook(book.id)}
+                                        >
+                                            Save
+                                        </button>
+                                    )}
+                                    />
+                                ))}
+                            </List>
+                                
+                        ) : (
+                            <div>
+                                <hr />
+                                <p>No results to display</p>
+                            </div>
+                        )}
+                    </Card>
                 </Container>
             </div>
         )

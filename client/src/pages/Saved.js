@@ -3,6 +3,9 @@ import { Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import Nav from "../components/Nav";
 import SavedList from "../components/SavedList";
+import Card from "../components/Card";
+import Book from "../components/Book";
+import {List }from "../components/List";
 
 import API from "../utils/API";
 
@@ -12,21 +15,21 @@ class Saved extends Component {
     };
 
     componentDidMount = () => {
-        this.getBooks();
+        this.getSavedBooks();
     };
 
-    deleteBook = selectedBook => {
-        API.deleteBook(selectedBook.id)
+    deleteBook = id => {
+        API.deleteBook(id)
             .then(res => {
                 console.log("Book deleted from DB!", res)
-                this.getBooks();
+                this.getSavedBooks();
             })
             .catch(err => {
                 console.log(err);
             })
     };
 
-    getBooks = () => {
+    getSavedBooks = () => {
         API.getBooks()
             .then(res => {
                 this.setState({
@@ -44,18 +47,35 @@ class Saved extends Component {
                 <Nav />
                 <Container fluid>
                     <Jumbotron />
-                    {this.state.savedBooks.length ? (
-                        <SavedList
-                            bookState={this.state.savedBooks}
-                            deleteBook={this.deleteBook}
-                        >
-                        </SavedList>
-                    ) : (
-                        <div>
-                            <hr />
-                            <p>No results to display</p>
-                        </div>
-                    )}
+                    <Card title="Saved">
+                        {this.state.savedBooks.length ? (
+                            <List>
+                                {this.state.savedBooks.map(book => ( 
+                                    <Book
+                                    key  = {book.id}
+                                    title = {book.volumeInfo.title}
+                                    authors = {book.volumeInfo.authors.join(", ")}
+                                    link = {book.volumeInfo.infoLink}
+                                    description = {book.volumeInfo.description}
+                                    image = {book.volumeInfo.imageLinks.thumbnail}
+                                    Button = { () => (
+                                        <button
+                                        onClick = { () => this.saveBook(book.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    )}
+                                    />
+                                ))}
+                            </List>
+                                
+                        ) : (
+                            <div>
+                                <hr />
+                                <p>No results to display</p>
+                            </div>
+                        )}
+                    </Card>
                 </Container>
             </div>
         )

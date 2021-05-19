@@ -1,37 +1,39 @@
-import React, {Component} from "react";
+import React from "react";
+import { ListItem } from "../List";
+import { Row, Col } from "../Grid";
+import "./style.css";
 
-class Book extends Component { 
-    state = { 
-        mounted:false,
-    }
-
-    componentDidMount = () => { 
-        this.state({ 
-            mounted:true
-        })
-    }
-
-    onClick = () => { 
-        this.props.saveBook(this.props)
-    }
-
-    render() { 
-        return (
-            <div>
-            <div className="card">
-                <div className="card-header"></div>
-                <div className="card-body">
-                    <img src={this.props.image} alt="bookcover" />
-                    <h5 className="card-title">{this.props.title}</h5>
-                    <p className="card-text" >{this.props.description}</p>
-                    <p >Author(s): {this.props.authors}</p>
-                    <a href={this.props.link} target="_blank" rel="noopener noreferrer" className="btn btn-primary">View</a>
-                    <button onClick={this.onClick} className="btn btn-success">Delete</button>
-                </div>
-            </div>
-        </div>
-        )
-    }
+function Book({ title, authors, link, description, image, Button }) {
+    return (
+        <ListItem>
+            <Row className="flex-wrap-reverse">
+                <Col size="md-8">
+                    <h3 className="font-italic">{title}</h3>
+                </Col>
+                <Col size="md-4">
+                    <div className="btn-container">
+                        <a className="btn btn-light" target="_blank" rel="noopener noreferrer" href={link}>
+                            View
+                        </a>
+                        <Button />
+                    </div>
+                </Col>
+            </Row>
+            <Row>
+                <Col size="md-6">
+                    <p className="font-italic small">Written by {authors}</p>
+                </Col>
+            </Row>
+            <Row>
+                <Col size="12 sm-4 md-2">
+                    <img className="img-thumbnail img-fluid w-100" src={image} alt={title} />
+                </Col>
+                <Col size="12 sm-8 md-10">
+                    <p>{description}</p>
+                </Col>
+            </Row>
+        </ListItem>
+    );
 }
 
 export default Book;
