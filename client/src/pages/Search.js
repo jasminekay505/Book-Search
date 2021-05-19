@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Col, Row, Container } from "../components/Grid";
+import { Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
 import Nav from "../components/Nav";
-import { Input, SearchBtn } from "../components/SearchForm";
-import ResultList from "../components/ResultList";
 import Card from "../components/Card";
 import Book from "../components/Book";
 import { List } from "../components/List";
@@ -24,7 +22,7 @@ class Search extends Component {
                     books: res.data.items,
                     search: ""
                 },
-                console.log(res.data))
+                    console.log(res.data))
             })
             .catch(err => console.log(err));
     };
@@ -43,7 +41,7 @@ class Search extends Component {
 
     saveBook = id => {
         const book = this.state.books.find(book => book.id === id);
-
+        console.log(book)
         API.saveBook({
             title: book.volumeInfo.title,
             authors: book.volumeInfo.authors,
@@ -52,7 +50,7 @@ class Search extends Component {
             link: book.volumeInfo.infoLink
         })
             .then(() => this.searchGoogleBooks())
-            .catch(err => console.log("Post err", err));
+            .catch(err => console.log(err));
     };
 
     render() {
@@ -71,25 +69,25 @@ class Search extends Component {
                     <Card title="Results">
                         {this.state.books.length ? (
                             <List>
-                                {this.state.books.map(book => ( 
+                                {this.state.books.map(book => (
                                     <Book
-                                    key  = {book.id}
-                                    title = {book.volumeInfo.title}
-                                    authors = {book.volumeInfo.authors.join(", ")}
-                                    link = {book.volumeInfo.infoLink}
-                                    description = {book.volumeInfo.description}
-                                    image = {book.volumeInfo.imageLinks.thumbnail}
-                                    Button = { () => (
-                                        <button
-                                        onClick = { () => this.saveBook(book.id)}
-                                        >
-                                            Save
-                                        </button>
-                                    )}
+                                        key={book.id}
+                                        title={book.volumeInfo.title}
+                                        authors={book.volumeInfo.authors.join(", ")}
+                                        link={book.volumeInfo.infoLink}
+                                        description={book.volumeInfo.description}
+                                        image={book.volumeInfo.imageLinks.thumbnail}
+                                        Button={() => (
+                                            <button
+                                                onClick={() => this.saveBook(book.id)}
+                                            >
+                                                Save
+                                            </button>
+                                        )}
                                     />
                                 ))}
                             </List>
-                                
+
                         ) : (
                             <div>
                                 <hr />
