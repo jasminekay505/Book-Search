@@ -24,19 +24,20 @@ class Search extends Component {
 
     searchGoogleBooks = () => {
         API.googleBooks(this.state.search)
-          .then(res =>
-            this.setState({
-              books: res.data.items
-            }),
-            console.log(this.state.books)
-          )
-          .catch(() =>
-            this.setState({
-              books: [],
-            })
-          );
-      };
-    
+            .then(res => {
+                console.log(res.data.items);
+                this.setState({
+                    books: res.data.items
+                })
+            }
+            )
+            .catch(() =>
+                this.setState({
+                    books: [],
+                })
+            );
+    };
+
     handleFormSubmit = event => {
         event.preventDefault();
         this.searchGoogleBooks();
@@ -79,7 +80,7 @@ class Search extends Component {
                                         authors={book.volumeInfo.authors.join(", ")}
                                         link={book.volumeInfo.infoLink}
                                         description={book.volumeInfo.description}
-                                        image={book.volumeInfo.imageLinks.thumbnail}
+                                        image={book.volumeInfo.imageLinks?.thumbnail}
                                         Button={() => (
                                             <button className="btn btn-light"
                                                 onClick={() => this.saveBook(book.id)}
