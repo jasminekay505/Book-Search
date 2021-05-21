@@ -25,7 +25,6 @@ class Search extends Component {
     searchGoogleBooks = () => {
         API.googleBooks(this.state.search)
             .then(res => {
-                console.log(res.data.items);
                 this.setState({
                     books: res.data.items
                 })
